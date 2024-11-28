@@ -13,6 +13,8 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/exercise-option-api">Exercise</RouterLink>
+        <RouterLink to="/exercise-fortgeschritten-option-api">Exercise-Fortgeschritten</RouterLink>
       </nav>
     </div>
   </header>
@@ -71,6 +73,7 @@ nav a:first-of-type {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+
   }
 
   nav {
