@@ -1,5 +1,9 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
+import axios from 'axios'
+import type { Trainingsplan } from '@/model/Trainingsplan'
+
+const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/Trainingsplan'
 
 export default defineComponent({
   name: "ExerciseOption",
@@ -7,10 +11,18 @@ export default defineComponent({
 
   data() {
     return {
-      übungsListe: ["Bankdrücken", "Bizepscurl", "Kreuzheben", "Kniebeugen"]
+      übungsListe: [] as Trainingsplan[]
     };
-  }
+  },
+  mounted () {
+
+    axios
+      .get<Trainingsplan[]>(apiEndpoint)
+      .then((response) => (this.übungsListe = response.data))
+      .catch((error) => console.log(error))
+}
 })
+
 </script>
 
 <template>
@@ -18,7 +30,7 @@ export default defineComponent({
     <h1>{{ title }}</h1>
     <div v-if="übungsListe.length > 0">
       <ul>
-        <li v-for="übung in übungsListe" :key="übung">
+        <li v-for="übung in übungsListe" :key="übung.uebungNr">
           {{ übung }}
         </li>
       </ul>
